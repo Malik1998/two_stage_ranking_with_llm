@@ -145,13 +145,7 @@ python3 -m venv create venv
 source venv/bin/activate
 pip3 install -r requirements.txt 
 
-```
-
-## Data
-Вот **краткий, аккуратный и профессиональный вариант** для `README.md`.
-Можно **копировать 1-в-1**.
-
----
+```  
 
 ## Data
 
