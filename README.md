@@ -116,10 +116,14 @@ These limitations are intentional to keep the project focused and bounded.
 
 ## Status
 
- ⃣ Candidate generation implemented
- ⃣ Re-ranking with LLM signals implemented
- ⃣ FastAPI serving layer
- ⃣ Offline evaluation
+ ⃣ Candidate generation implemented  
+
+ ⃣ Re-ranking with LLM signals implemented  
+
+ ⃣ FastAPI serving layer  
+ 
+ ⃣ Offline evaluation  
+
 
 **Project intentionally stopped at this point.**
 
