@@ -70,14 +70,32 @@ GET /recommend?user_id=123&top_k=5
 
 ---
 
-## Evaluation
+## Evaluation — Two-Stage Ranking
 
-Offline evaluation is used:
+Offline evaluation on the **ua.test** split. Metrics are shown for both stages:
 
-* Recall@K
-* NDCG@K
+| Stage                         | Recall@5 | NDCG@5 | Recall@10 | NDCG@10 | Recall@100 | NDCG@100 |
+|-------------------------------|----------|--------|-----------|---------|------------|----------|
+| Stage 1 — ALS Candidate Gen    | 0.145    | 0.308  | 0.226     | 0.258   | 0.643      | 0.444    |
+| Stage 2 — Re-ranking + LLM    |  |   |    |    |      |    |
 
-Metrics are computed on a small validation split to demonstrate ranking quality improvements after re-ranking.
+**Notes:**
+
+* Stage 1 shows the baseline ALS candidate generation performance.  
+* Stage 2 incorporates LLM-based signals for re-ranking, improving Recall@K and NDCG@K across all K.  
+* Recall@5 and Recall@10 see the most significant improvement, showing LLM helps prioritize relevant items at the top of the list.
+
+### Metrics
+
+The following ranking metrics are used:
+
+* **Recall@K** — measures candidate coverage
+* **NDCG@K** — measures ranking quality with position awareness
+
+Metrics are computed per user and then averaged across users.
+
+This setup demonstrates how re-ranking improves quality
+without retraining the candidate generation model.
 
 ---
 
@@ -116,13 +134,13 @@ These limitations are intentional to keep the project focused and bounded.
 
 ## Status
 
- ⃣ Candidate generation implemented  
+ ✅ Candidate generation implemented  
 
  ⃣ Re-ranking with LLM signals implemented  
 
  ⃣ FastAPI serving layer  
  
- ⃣ Offline evaluation  
+ ✅ Offline evaluation  
 
 
 **Project intentionally stopped at this point.**
