@@ -21,13 +21,11 @@ class CandidateGenerator:
 
         self.user_id_to_internal = {k: v for k, v in self.user_map.items()}
 
-
-    def recommend(self, user_id: int, top_n=100):
+    def recommend_with_scores(self, user_id: int, top_n=100):
         if user_id not in self.user_id_to_internal:
-            return []
+            return [], []
 
         uid = self.user_id_to_internal[user_id]
-
         user_row = self.matrix[uid]
 
         items, scores = self.model.recommend(
@@ -37,4 +35,19 @@ class CandidateGenerator:
             filter_already_liked_items=True
         )
 
-        return [self.internal_to_item_id[i] for i in items]
+        item_ids = [self.internal_to_item_id[i] for i in items]
+        return item_ids, scores.tolist()
+
+
+    def recommend(self, user_id: int, top_n=100):
+        return self.recommend_with_scores(user_id, top_n)[0]
+    
+    def predict(self, user_id: int, item_id: int):
+        if user_id not in self.user_id_to_internal or item_id not in self.item_map:
+            return None
+
+        uid = self.user_id_to_internal[user_id]
+        iid = self.item_map[item_id]
+
+        score = np.dot(self.model.user_factors[uid], self.model.item_factors[iid])
+        return score

@@ -2,3 +2,6 @@ numpy
 pandas
 implicit
 scipy
+lightgbm
+openai
+scikit-learn

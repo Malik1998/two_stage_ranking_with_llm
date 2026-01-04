@@ -3,11 +3,17 @@ import pickle
 import numpy as np
 from scipy.sparse import csr_matrix, save_npz
 from implicit.als import AlternatingLeastSquares
+from train_utils import train_valid_split
 
 eps = 1e-6
 # Load data
 cols = ["user_id", "item_id", "rating", "timestamp"]
 train = pd.read_csv("data/ua.base", sep="\t", names=cols)
+train_als, future_labels = train_valid_split(train, valid_ratio=0.1)
+
+train_als.to_csv("data/train_als.csv", index=False)
+future_labels.to_csv("data/future_labels.csv", index=False)
+
 train_user_mean = train.groupby("user_id")["rating"].mean().reset_index()
 train = train.merge(train_user_mean, on="user_id", suffixes=("", "_mean"))
 
