@@ -136,7 +136,7 @@ These limitations are intentional to keep the project focused and bounded.
 
  ✅ Candidate generation implemented  
 
- ⃣ Re-ranking with LLM signals implemented  
+ ✅ Re-ranking with LLM signals implemented  
 
  ⃣ FastAPI serving layer  
  
