@@ -4,6 +4,7 @@ from models.stage1_candidate import CandidateGenerator
 from models.stage2_rerank import Stage2ReRanker
 import pandas as pd
 import numpy as np
+from tqdm import tqdm
 
 
 cols = ["user_id", "item_id", "rating", "timestamp"]
@@ -15,7 +16,7 @@ stage2_model = Stage2ReRanker()
 all_metrics_stage1 = []
 all_metrics_stage2 = []
 
-for user_id in test_df["user_id"].unique():
+for user_id in tqdm(test_df["user_id"].unique(), total=len(test_df["user_id"].unique())):
     relevant_items = set(test_df[test_df.user_id == user_id]["item_id"])
 
     candidates, scores = stage1_model.recommend_with_scores(user_id, top_n=100)

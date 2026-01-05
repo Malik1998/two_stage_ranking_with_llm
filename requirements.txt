@@ -5,3 +5,5 @@ scipy
 lightgbm
 openai
 scikit-learn
+catboost
+tqdm

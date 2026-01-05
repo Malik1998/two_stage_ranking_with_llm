@@ -14,8 +14,8 @@ train_als, future_labels = train_valid_split(train, valid_ratio=0.1)
 train_als.to_csv("data/train_als.csv", index=False)
 future_labels.to_csv("data/future_labels.csv", index=False)
 
-train_user_mean = train.groupby("user_id")["rating"].mean().reset_index()
-train = train.merge(train_user_mean, on="user_id", suffixes=("", "_mean"))
+train_user_mean = train_als.groupby("user_id")["rating"].mean().reset_index()
+train = train_als.merge(train_user_mean, on="user_id", suffixes=("", "_mean"))
 
 
 train["interaction"] = ( train["rating"] / (train["rating_mean"] + eps)).clip(0.25, 4.0)

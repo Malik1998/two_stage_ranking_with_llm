@@ -104,7 +104,7 @@ def build_user_embeddings(
         else:
             user_embeddings[user_id] = default_emb
 
-    np.save(f"{artifacts_path}/user_embeddings.npy", user_embeddings)
+    np.save(f"{artifacts_path}/user_embeddings_top{top_n}.npy", user_embeddings)
     print(f"Saved {len(user_embeddings)} user embeddings, not_default_count={not_default_count}")
 
 
@@ -119,12 +119,14 @@ def build_features(
     user_embeddings,
     item_embeddings,
     item_popularity,
-    user_info=None
+    user_info=None,
+    item_info=None
 ):
     rows = []
-
     user_emb = user_embeddings.get(user_id)
     user_extra = user_info.loc[user_id].values if user_info is not None and user_id in user_info.index else []
+    item_extra = item_info.loc[user_id].values if item_info is not None and user_id in item_info.index else []
+    
     
     for item_id, als_score in zip(candidate_items, als_scores):
         item_emb = item_embeddings.get(item_id)
@@ -134,12 +136,12 @@ def build_features(
             if user_emb is not None and item_emb is not None
             else 0.0
         )
-
         rows.append([
             als_score,
             llm_sim,
             item_popularity.get(item_id, 0),
-            *user_extra 
+            *user_extra,
+            *item_extra 
         ])
 
     return np.array(rows)

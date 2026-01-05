@@ -76,8 +76,8 @@ Offline evaluation on the **ua.test** split. Metrics are shown for both stages:
 
 | Stage                         | Recall@5 | NDCG@5 | Recall@10 | NDCG@10 | Recall@100 | NDCG@100 |
 |-------------------------------|----------|--------|-----------|---------|------------|----------|
-| Stage 1 — ALS Candidate Gen    | 0.144    | 0.308  | 0.226     | 0.258   | 0.644      | 0.444    |
-| Stage 2 — Re-ranking + LLM    | 0.109 |  0.238 |  0.171  |  0.199  |  0.644   |  0.402  |
+| Stage 1 — ALS Candidate Gen    | 0.128    | 0.279  | 0.211     | 0.239   | 0.621      | 0.421    |
+| Stage 2 — Re-ranking + LLM    | 0.136 |  0.291 |  0.217  |  0.246  |  0.621   |  0.425  |
 
 **Notes:**
 
