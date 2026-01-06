@@ -2,8 +2,9 @@ numpy
 pandas
 implicit
 scipy
-lightgbm
 openai
 scikit-learn
 catboost
 tqdm
+fastapi
+uvicorn

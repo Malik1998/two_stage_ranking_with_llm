@@ -1,8 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-import lightgbm as lgb
-import pickle
 
 from models.stage1_candidate import CandidateGenerator
 from utils.stage2_feature_builders import (
