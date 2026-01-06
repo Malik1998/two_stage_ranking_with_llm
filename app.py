@@ -33,6 +33,7 @@ class RecommendationResponse(BaseModel):
     user_id: int
     recommendations: List[int]
     status: str = "success"
+    metadata: dict = {"model_version": "2-stage-v1-llm"}
 
 @app.get("/", tags=["Health"])
 def health_check():
